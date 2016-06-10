@@ -14,6 +14,7 @@ Notes:
   The hello.sh script will create the EC2 ssh key in the current working directory, create a security group in EC2 and launch a ubuntu 14.04 t2.micro instance.
   Once the instance is booted, it will run the playbook.yaml against it with ansible-playbook. 
   The playbook with configure the instance with gunicorn and deploy a small flask app on port 8000. 
+  The flask app is hardcoded to https://github.com/marikgoran/hello-flask in the playbook.yaml for simplicity, but it can be easily passed as var or template to ansible. 
   
 Bugs and errors:
   * The deployment script will not terminate the instance. Make sure to terminate it manually *
