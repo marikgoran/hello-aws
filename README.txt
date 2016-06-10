@@ -1,9 +1,10 @@
 Small script to automate deployment of flask apps on a EC2 instance.
 
 Dependencies:
-- Linux workstation, tested on Ubuntu 16.04
+- bash 4+
 - fully configured aws cli, tested with the AWS free tier
-- ansible, from the Ubuntu 16.04 repo
+- ansible 2+
+Tested and developed on OSX 10.9 and Ubuntu 16.04
 
 Usage:
 - clone the repo
