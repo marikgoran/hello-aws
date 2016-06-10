@@ -4,11 +4,12 @@ Dependencies:
 - bash 4+
 - fully configured aws cli, tested with the AWS free tier
 - ansible 2+
-Tested and developed on OSX 10.9 and Ubuntu 16.04
+Tested and developed on OSX 10.9 with up to date homebrew and Ubuntu 16.04 with default repos.
 
 Usage:
-- clone the repo
-- run ./hello.sh
+- git clone git@github.com:marikgoran/hello-aws.git
+- cd hello-aws
+- ./hello.sh 
 
 Notes:
   The hello.sh script will create the EC2 ssh key in the current working directory, create a security group in EC2 and launch a ubuntu 14.04 t2.micro instance.
