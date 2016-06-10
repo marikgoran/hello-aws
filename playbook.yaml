@@ -12,6 +12,6 @@
   - name: clone the repo
     git: repo=https://github.com/marikgoran/hello-flask.git dest=/opt/flask/hello-flask
   - name: set the gunicorn conf file
-    template: src=hello.gunicorn.j2 dest=/etc/gunicorn.d/hello.conf
+    template: src=gunicorn.template.j2 dest=/etc/gunicorn.d/hello.conf
   - name: ensure gunicorn is running
     service: name=gunicorn state=restarted
