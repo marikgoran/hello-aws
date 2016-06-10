@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: install gunicorn
+    apt:  name=gunicorn state=latest update_cache=yes
+  - name: install flask
+    apt:  name=python-flask state=latest
+  - name: install git
+    apt:  name=git state=latest
+  - name: clone the repo
+    git: repo=https://github.com/marikgoran/hello-flask.git dest=/opt/flask/hello-flask
+  - name: set the gunicorn conf file
+    template: src=hello.gunicorn.j2 dest=/etc/gunicorn.d/hello.conf
+  - name: ensure gunicorn is running
+    service: name=gunicorn state=restarted
