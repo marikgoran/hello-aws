@@ -9,7 +9,7 @@ echo "Creating security group and ssh key..."
 # make sure the key file exists and the key with that name is not in AWS
 if [[ ! -f $KEY.pem ]]
 then
-    aws ec2 create-key-pair --key-name $KEY --query 'KeyMaterial' --output text > $KEY.pem || { echo "Failed to create a new key, exiting"; exit 1; }
+    aws ec2 create-key-pair --key-name $KEY --query 'KeyMaterial' --output text > $KEY.pem || { echo "Failed to create a new key, exiting"; rm $KEY.pem; exit 1; }
     chmod 400 $KEY.pem  
 else
     echo "The key $KEY exists, continuing without changes"
