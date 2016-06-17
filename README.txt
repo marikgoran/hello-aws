@@ -10,8 +10,9 @@ Dependencies:
 Tested and developed on OSX 10.9 with up to date homebrew and Ubuntu 16.04 with default repos.
 
 Description:
-  The script is driven by a make, in order to provide consistent user/ops experience. It seems that terraform in the current version does not support creating keys for AWS, so some interaction to awscli would have been required anyways.
-  The instance config is done with ansible, by reusing the code in the master branch. Migrating this part of the code to the chef provisoner would probably make more sense.
+  The script is driven by make, in order to provide consistent user/ops experience. It seems that terraform in the current version does not support creating keys for AWS, so some interaction to awscli would have been required anyways.
+
+The instance config is done with ansible, by reusing the code in the master branch. Migrating this part of the code to the chef provisoner would probably make more sense.
 
 Usage:
   git clone git@github.com:marikgoran/hello-aws.git
