@@ -1,7 +1,7 @@
 publicIP=$(shell terraform output | awk '/publicIP/ {print $$3}' )
 
 help:
-	@printf 'Usage:\n Run "make prep" once to create the keys and groups\n Run "make instance" to create the instance with terraform\n Run "make info" to get the IP addresses of the instance\n Run "make deploy" to configure the instance with ansible - give some to the instance to boot first\n Run "make hello" to test it all\n'
+	@printf 'Usage:\n Run "make prep" once to create the keys and groups\n Run "make instance" to create the instance with terraform\n Run "make info" to get the IP addresses of the instance\n Run "make deploy" to configure the instance with ansible - give some to the instance to boot first\n Run "make hello" to test it all\n ( Other targets are destroy/unprep,ssh and uptime )\n'
 
 prep:
 	@-aws ec2 create-key-pair --key-name terraform --query 'KeyMaterial' --output text > terraform.pem
@@ -17,15 +17,17 @@ instance:
 deploy:
 	ansible-playbook -i $(publicIP), --user=ubuntu --private-key=terraform.pem --ssh-extra-args='-o StrictHostKeyChecking=no'  playbook.yaml
 	
-#it seems terraform cannot create ad-hoc keys, so wrap the prep steps with undo target for easier testing
-unprep:
+unprep destroy:
 	@echo yes | terraform destroy
 	@aws ec2 delete-security-group --group-name 'terraform' || true
 	@aws ec2 delete-key-pair --key-name 'terraform' || true
 	@rm -f terraform.pem 
 
 #target to test ssh access to the instance
-test-ssh:
+ssh:
+	ssh -i terraform.pem -o StrictHostKeyChecking=no ubuntu@$(publicIP)
+
+uptime:
 	ssh -i terraform.pem -o StrictHostKeyChecking=no ubuntu@$(publicIP) uptime
 	
 hello:
@@ -33,3 +35,4 @@ hello:
 	
 info:
 	@terraform output
+	
