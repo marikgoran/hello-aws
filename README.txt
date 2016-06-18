@@ -1,4 +1,4 @@
-Small bash script to automate deployment of flask apps on a EC2 instance with ansible.
+Small bash script to automate deployment of flask apps with ansible on a EC2 instance.
 
 Checkout the terraform branch to see a somewhat more polished approach using terraform. There should be a beanstalk branch soon as well. 
 
